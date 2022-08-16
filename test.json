@@ -1,0 +1,52 @@
+{
+  "resultCode": "00",
+  "resultMsg": "NORMAL_SERVICE",
+  "numOfRows": "10",
+  "totalCount": "6",
+  "doubleDataFlag": "Y",
+  "data": {
+    "dongCode": "101",
+    "hoCode": "101",
+    "carNo": "ALL",
+    "inCarFlag": "ALL",
+    "viewPeriod": "ALL",
+    "items": [
+      {
+        "visStartDate": "20220630120000",
+        "visStartCnt": 1,
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "visStartDate": "20220701120000",
+        "visStartCnt": 1,
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "visStartDate": "20220702120000",
+        "visStartCnt": 1,
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "visStartDate": "20220703120000",
+        "visStartCnt": 1,
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "visStartDate": "20220704120000",
+        "visStartCnt": 1,
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "visStartDate": "20220629120000",
+        "visStartCnt": 1,
+        "carNo": "1가1269",
+        "inCarFlag": "N"
+      }
+    ]
+  }
+}
