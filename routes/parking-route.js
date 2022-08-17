@@ -54,7 +54,7 @@ router.get("/getParkingIOList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
-    const sql = `select DATE_FORMAT(inout_dtime, '%Y%m%d%h%i') as inoutDate, car_no as carNo, inout_flag, car_flag as  carFlag
+    const sql = `select DATE_FORMAT(inout_dtime, '%Y%m%d%h%i') as inoutDate, car_no as carNo, inout_flag as inoutFlag, car_flag as  carFlag
                  from t_parking_io where dong_code = ? and ho_code = ? and car_no like ? and car_flag like ? and inout_dtime >= ?  
                  limit ?, ?`;
 
@@ -83,9 +83,12 @@ router.get("/getParkingIOList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
+        dongCode,
+        hoCode,
         carNo,
         carFlag,
         viewPeriod,
@@ -143,8 +146,10 @@ router.get("/getParkingResvList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+    // 문서상 visStartCnt 삭제되어 해당 구문 제거
+    // DATEDIFF(vis_end_date, vis_start_date) as visStartCnt,
     let sql = `select DATE_FORMAT(vis_start_date, '%Y%m%d%h%i%s') as visStartDate, 
-                        DATEDIFF(vis_end_date, vis_start_date) as visStartCnt, 
+                        resv_no as resvNo,
                         car_no as carNo, 
                         inout_flag as inCarFlag `;
     const fSQL =
@@ -182,6 +187,7 @@ router.get("/getParkingResvList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
