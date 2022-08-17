@@ -49,6 +49,7 @@ router.get("/getManagementFeeList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
@@ -109,8 +110,22 @@ router.get("/getManagementFeeDetail", async (req, res, next) => {
     //console.log("mngFee=>" + mngFee);
     console.log("mngFee=>" + mngFee.length);
     console.log("mngFeeItem=>" + mngFeeItem.length);
-    console.log("mngFeeAlias=>" + mngFeeAlias.length);
 
+    //////////////////////////////////////////////////////////////////////////////////
+    /**
+     * 년,월 에 해당 하는 totalMng DB에서 호출 구문
+     * 2022년08월18일/김동현
+     */
+    const totoalMngSql = `select total_mng as totalMng from t_management_fee
+                          where mng_year = ${mngYear} and mng_month = ${mngMonth}`;
+    const totalMngData = await pool.query(totoalMngSql);
+    let totalMngList = totalMngData[0];
+    let totalMng = "";
+    if (totalMngList.length > 0) {
+      totalMng = totalMngList[0].totalMng;
+    }
+    console.log("totalMng: " + totalMng);
+    //////////////////////////////////////////////////////////////////////////////////
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
@@ -121,6 +136,7 @@ router.get("/getManagementFeeDetail", async (req, res, next) => {
         hoCode,
         mngFeeItem: mngFeeAlias,
         mngFee,
+        totalMng,
         // item: {
         //   mngFeeItem: mngFeeAlias,
         //   mngFee,
