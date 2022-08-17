@@ -65,11 +65,14 @@ router.get("/getNoticeList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
         //dataType,
         dongCode,
+        hoCode,
+        notiType,
         items: resultList,
       },
     };
@@ -98,7 +101,7 @@ router.get("/getNoticeDetail", async (req, res, next) => {
     const tSQL =
       " and b.dong_code ='" + dongCode + "' and b.ho_code = '" + hoCode + "' ";
 
-    const sql = `select a.idx, a.noti_type as notiType, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d%h%i%s') as startDate, noti_content as notiContent 
+    const sql = `select a.idx, a.noti_type as notiType, a.noti_owner as notiOwner, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d%h%i%s') as startDate, noti_content as notiContent 
                  from t_notice a
                  inner join  t_notice_send b 
                  where a.idx = ?  ${tSQL}`;
@@ -109,23 +112,32 @@ router.get("/getNoticeDetail", async (req, res, next) => {
     let notiTitle = "";
     let startDate = "";
     let notiContent = "";
+    let notiOwner = "";
+    let notiType = "";
 
     resultList = data[0];
     if (resultList.length > 0) {
       notiTitle = resultList[0].notiTitle;
       startDate = resultList[0].startDate;
       notiContent = resultList[0].notiContent;
+      notiOwner = resultList[0].notiOwner;
+      notiType = resultList[0].notiType;
     }
-
+    console.log("notiOwner: " + notiOwner);
+    console.log("notiType: " + notiType);
     //console.log(resultList[0].notiTitle);
 
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
-      idx,
-      notiTitle,
-      startDate,
-      notiContent,
+      data: {
+        idx,
+        notiType,
+        notiTitle,
+        startDate,
+        notiOwner,
+        notiContent,
+      },
     };
 
     return res.json(jsonResult);
