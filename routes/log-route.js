@@ -93,11 +93,13 @@ router.get("/getInoutLogList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt + "",
       doubleDataFlag,
       data: {
         dongCode,
         hoCode,
+        occurLocFlag,
         viewPeriod,
         items: resultList,
       },
@@ -145,8 +147,8 @@ router.get("/getEmergencyLogList", async (req, res, next) => {
 
     const sql = `select DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime, 
                       (
-                        CASE WHEN occur_loc_flag = 'HOUSE' THEN '세대'
-                            WHEN occur_loc_flag = 'PUBLIC' THEN '공용부'
+                        CASE WHEN occur_loc_loc = 'HOUSE' THEN '세대'
+                            WHEN occur_loc_loc = 'PUBLIC' THEN '공용부'
                             ELSE '정보없음'
                         END
                       ) as occurLocName, 
@@ -194,6 +196,7 @@ router.get("/getEmergencyLogList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
