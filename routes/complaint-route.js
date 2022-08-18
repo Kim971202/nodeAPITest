@@ -79,6 +79,7 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
     hoCode = "0000", //          호코드
     appCode = "ALL", //          민원유형: 전체(ALL)/월패드에서 호출 시 : 1(보수신청)
     viewPeriod = "ALL", //       조회기간전체: (ALL)/일주일(1WEEK)/1개월(1MONTH)/3개월(3MONTH)
+    progressStatus = "3", //     진행상태: 신청(1)/접수(2)/처리(3)/ 취소(0)
   } = req.query;
 
   console.log(
@@ -89,9 +90,10 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
     hoCode,
     doubleDataFlag,
     appCode,
-    viewPeriod
+    viewPeriod,
+    progressStatus
   );
-  //http://localhost:3000/complaint/getApplicationCompaintList?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&appCode=ALL&viewPeriod=ALL
+  //http://localhost:3000/complaint/getApplicationCompaintList?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&appCode=ALL&viewPeriod=ALL&progressStatus=3
 
   let appCode_ = appCode === "ALL" ? "%" : appCode;
 
@@ -108,8 +110,9 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+    // 문서상 삭제된 a.app_content, 삭제
     let sql = `select a.idx, a.app_title as appTitle, DATE_FORMAT(a.app_date, '%Y%m%d%h%i%s') as appDate, 
-                      a.app_code as appCode, a.app_content, a.progress_status 
+                      a.app_code as appCode, a.progress_status as progressStatus 
                from t_application_complaint a inner join t_complaints_type b
                on a.app_code = b.app_code
                where a.dong_code = ? and a.ho_code = ? and a.app_code like ? and a.app_date >= ? 
@@ -147,6 +150,7 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
       resultCode: "0000",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
@@ -185,7 +189,7 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
     doubleDataFlag,
     idx
   );
-  //http://localhost:3000/complaint/getApplicationCompaintDetail?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&idx=1
+  //http://localhost:3000/complaint/getApplicationCompaintDetail?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&idx=3
 
   try {
     let sRow = (pageNo - 1) * numOfRows;
