@@ -42,6 +42,7 @@ router.get("/getContractList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
