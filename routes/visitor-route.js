@@ -79,6 +79,7 @@ router.get("/getVisitorList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt + "",
       doubleDataFlag,
       data: {
