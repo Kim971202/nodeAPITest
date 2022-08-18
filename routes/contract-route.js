@@ -99,11 +99,13 @@ router.get("/getContractDetail", async (req, res, next) => {
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
-      idx,
-      contractTitle,
-      contractDate,
-      fileName,
-      contractContent,
+      data: {
+        idx,
+        contractTitle,
+        contractDate,
+        fileName,
+        contractContent,
+      },
     };
 
     return res.json(jsonResult);
