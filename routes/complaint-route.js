@@ -52,6 +52,7 @@ router.get("/getApplicationCompaintType", async (req, res, next) => {
       resultCode: "0000",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+      pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
