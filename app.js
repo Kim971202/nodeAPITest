@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-//const dotenv = require("dotenv");
-//dotenv.config();
+const dotenv = require("dotenv");
+dotenv.config();
 
 const noticeRoute = require("./routes/notice-route");
 const mngFeeRoute = require("./routes/mngfee-route");
@@ -19,7 +19,9 @@ const logRoute = require("./routes/log-route");
 const contractRoute = require("./routes/contract-route");
 const homeInfoRoute = require("./routes/homeInfo-route");
 const emsRoute = require("./routes/ems-route");
-
+//////////////////////////////////////////////
+const etcRoute = require("./routes/etc-route");
+//////////////////////////////////////////////
 const app = express();
 const port = 3000; // 서버 포트번호
 
@@ -42,6 +44,7 @@ app.use("/log", logRoute);
 app.use("/contract", contractRoute);
 app.use("/homeInfo", homeInfoRoute);
 app.use("/ems", emsRoute);
+app.use("/etc", etcRoute);
 
 app.listen(port, () => {
   console.log(`서버가 실행됩니다. http://localhost:${port}`);
