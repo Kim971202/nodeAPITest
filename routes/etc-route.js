@@ -23,19 +23,29 @@ router.get("/getSummaryInfoList", async (req, res, next) => {
                 UNION ALL
                 SELECT idx, '택배' AS summaryTitle, count(arrival_time) AS summaryMSG
                 FROM t_delivery
-                WHERE arrival_time >= now() AND parcel_status = 1
-                ;`;
+                WHERE arrival_time >= now() AND parcel_status = 1;`;
 
     const data = await pool.query(sql);
     const resultList = data[0];
     let summaryTitle = "";
     let summaryMSG = "";
-    console.log("summaryMSG: " + summaryMSG);
+
+    // summaryMSG가 0인 경우는 새로운게 없는 상황 이므로 표시하지 안는다.
     if (resultList.length > 0) {
       summaryTitle = resultList[0].summaryTitle;
       summaryMSG = resultList[0].summaryMSG;
     }
-    console.log("summaryMSG: " + summaryMSG);
+    console.log("resultListLength: " + resultList.length)
+
+    for(i = 0; i < resultList.length; i++){
+      console.log("i: " + i);
+      if(resultList[i].summaryMSG == 0){
+        console.log("resultList[" + i + "]summaryMSG: " + resultList[i].summaryMSG)
+        resultList.splice(i , 1);
+        //splice 사용시 기존 인덱스 - 1 이기 때문에 1을 빼줘야 한다.
+        i--;
+      }
+    }
 
     let jsonResult = {
       resultCode: "00",
