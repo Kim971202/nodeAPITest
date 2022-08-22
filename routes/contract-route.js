@@ -74,7 +74,7 @@ router.get("/getContractDetail", async (req, res, next) => {
 
   try {
     const sql = `select idx, contract_title as contractTitle, DATE_FORMAT(contract_date, '%Y%m%d%h%i%s') as contractDate, 
-                        file_name as fileName, contract_content as contractContent
+                        file_name as fileName, file_path as filePath, contract_content as contractContent
                  from t_contract_document
                  where idx = ? `;
 
@@ -84,6 +84,7 @@ router.get("/getContractDetail", async (req, res, next) => {
     let contractTitle = "";
     let contractDate = "";
     let fileName = "";
+    let filePath = "";
     let contractContent = "";
 
     resultList = data[0];
@@ -92,6 +93,7 @@ router.get("/getContractDetail", async (req, res, next) => {
       contractDate = resultList[0].contractDate;
       fileName = resultList[0].fileName;
       contractContent = resultList[0].contractContent;
+      filePath = resultList[0].filePath;
     }
 
     //console.log(resultList[0].notiTitle);
@@ -104,6 +106,7 @@ router.get("/getContractDetail", async (req, res, next) => {
         contractTitle,
         contractDate,
         fileName,
+        filePath,
         contractContent,
       },
     };
