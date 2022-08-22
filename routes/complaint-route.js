@@ -31,7 +31,7 @@ router.get("/getApplicationCompaintType", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
-    const sql = `select app_code as appCode, app_name as appName
+    const sql = `select app_code as appCode, app_name as appCodeName
                  from t_complaints_type 
                  order by app_code, sort_order
                  limit ?, ?`;
@@ -153,6 +153,7 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
       pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
+      progressStatus,
       data: {
         dongCode,
         hoCode,
@@ -214,15 +215,19 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
     let appTitle = "";
     let appDate = "";
     let appContent = "";
+    let appName = "";
+    let appCode = "";
     let progressStatus = "";
     let appReceiptDate = "";
-    let appCompleteDate;
+    let appCompleteDate = "";
 
     resultList = data[0];
     if (resultList.length > 0) {
       appTitle = resultList[0].appTitle;
       appDate = resultList[0].appDate;
       appContent = resultList[0].appContent;
+      appCode = resultList[0].appCode;
+      appName = resultList[0].appName;
       progressStatus = resultList[0].progressStatus;
       appReceiptDate = resultList[0].appReceiptDate;
       appCompleteDate = resultList[0].appCompleteDate;
@@ -233,13 +238,17 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
-      idx,
-      appTitle,
-      appDate,
-      appContent,
-      progressStatus,
-      appReceiptDate,
-      appCompleteDate,
+      data: {
+        idx,
+        appTitle,
+        appDate,
+        appContent,
+        appName,
+        appCode,
+        progressStatus,
+        appReceiptDate,
+        appCompleteDate,
+      }
     };
 
     return res.json(jsonResult);
