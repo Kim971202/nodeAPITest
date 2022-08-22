@@ -44,14 +44,14 @@ router.get("/getElevatorCallLog", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+    //     from t_elevator_control where dong_code = ? and ho_code = ? and control_req_dtime >= ?
     const sql = `select DATE_FORMAT(control_req_dtime, '%Y%m%d%h%i%s') as controlReqDTime, 
                       (
                         CASE WHEN comm_result = 'Y' THEN '성공'
                             ELSE '실패'
                         END
                       ) as  commResult
-                 from t_elevator_control where dong_code = ? and ho_code = ? and control_req_dtime >= ?  
-                 limit ?, ?`;
+                 from t_elevator_control where dong_code = ? and ho_code = ? and control_req_dtime >= ?;`;
 
     console.log("sql=>" + sql);
     const data = await pool.query(sql, [
