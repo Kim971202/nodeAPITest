@@ -46,7 +46,7 @@ router.get("/getInoutLogList", async (req, res, next) => {
                           WHEN entry_method = 'B' THEN 'BLE'
                           ELSE '정보없음'
                       END
-                    ) as ioMethod
+                    ) as ioMethods
               from t_home_entry_log  `;
 
   let lSQL = `select DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime, 
