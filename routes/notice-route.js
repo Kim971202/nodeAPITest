@@ -45,7 +45,7 @@ router.get("/getNoticeList", async (req, res, next) => {
                  from t_notice a
                  inner join  t_notice_send b 
                  where  a.idx = b.idx and a.start_date <= now() and end_date >= now() and a.noti_type LIKE ?  ${tSQL}
-                `;
+                limit ?, ?`;
     console.log("sql=>" + sql);
 
     const data = await pool.query(sql, [notiType_, Number(sRow), Number(size)]);
