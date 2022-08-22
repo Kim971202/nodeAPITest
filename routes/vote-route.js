@@ -163,7 +163,6 @@ router.get("/getVoteAgendaDetail", async (req, res, next) => {
       voteDesc,
       vStartDate,
       vEndDate,
-      voteResult,
       voteItems,
     };
 
