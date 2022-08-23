@@ -44,13 +44,14 @@ router.get("/getEVChargingLog", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
-    const sql = `select idx, charger_status as chargerStatus, charger_id as chargerID, charger_loc as chargerLoc, 
+    const sql = `select idx, charger_id as chargerID, charger_loc as chargerLoc, 
                         (
                           CASE WHEN charger_type = '완속' THEN 'slow'
                                WHEN charger_type = '급속' THEN 'fast'
                               ELSE '-'
                           END
                         ) as  chargerType,
+                        charger_status as chargerStatus,
                         DATE_FORMAT(charge_start_dtime, '%Y%m%d%h%i%s') as startDTime, 
                         DATE_FORMAT(charge_end_dtime, '%Y%m%d%h%i%s') as endDTime,
                         charge_remain_time as remainTime, use_fee as chargeUseFee, charge_amount as fillingAmount

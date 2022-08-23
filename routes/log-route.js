@@ -147,12 +147,6 @@ router.get("/getEmergencyLogList", async (req, res, next) => {
 
     const sql = `select idx, DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime, 
                       (
-                        CASE WHEN occur_loc_loc = 'HOUSE' THEN '세대'
-                            WHEN occur_loc_loc = 'PUBLIC' THEN '공용부'
-                            ELSE '정보없음'
-                        END
-                      ) as occurLocName, 
-                      (
                         CASE WHEN emergency_type = 'invasion' THEN '침입'
                             WHEN emergency_type = 'emer' THEN '비상'
                             WHEN emergency_type = 'fire' THEN '화재'
@@ -162,6 +156,12 @@ router.get("/getEmergencyLogList", async (req, res, next) => {
                             ELSE '기타'
                         END
                       ) as emergencyType,
+                      (
+                        CASE WHEN occur_loc_loc = 'HOUSE' THEN '세대'
+                            WHEN occur_loc_loc = 'PUBLIC' THEN '공용부'
+                            ELSE '정보없음'
+                        END
+                      ) as occurLocName, 
                       (
                         CASE WHEN state = '0' THEN '발생'
                             WHEN state = '1' THEN '정지'

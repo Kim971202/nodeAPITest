@@ -85,8 +85,8 @@ router.get("/getVisitorList", async (req, res, next) => {
       data: {
         dongCode,
         hoCode,
-        viewPeriod,
         occurLocFlag,
+        viewPeriod,
         items: resultList,
       },
     };
