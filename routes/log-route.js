@@ -145,7 +145,7 @@ router.get("/getEmergencyLogList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
-    const sql = `select DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime, 
+    const sql = `select idx, DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime, 
                       (
                         CASE WHEN occur_loc_loc = 'HOUSE' THEN '세대'
                             WHEN occur_loc_loc = 'PUBLIC' THEN '공용부'
