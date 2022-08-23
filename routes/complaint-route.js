@@ -153,7 +153,6 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
       pageNo,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
-      progressStatus,
       data: {
         dongCode,
         hoCode,
@@ -239,16 +238,18 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       data: {
+        dongCode,
+        hoCode,
         idx,
         appTitle,
         appDate,
-        appContent,
-        appName,
         appCode,
+        appName,
+        appContent,
         progressStatus,
         appReceiptDate,
         appCompleteDate,
-      }
+      },
     };
 
     return res.json(jsonResult);
