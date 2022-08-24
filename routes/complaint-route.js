@@ -69,7 +69,7 @@ router.get("/getApplicationCompaintType", async (req, res, next) => {
 });
 
 //민원신청현황 목록조회
-router.get("/getApplicationCompaintList", async (req, res, next) => {
+router.get("/getApplicationComplaintList", async (req, res, next) => {
   let {
     serviceKey = "111111111", // 서비스 인증키
     numOfRows = 10, //           페이지 당 결과수
@@ -79,7 +79,7 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
     hoCode = "0000", //          호코드
     appCode = "ALL", //          민원유형: 전체(ALL)/월패드에서 호출 시 : 1(보수신청)
     viewPeriod = "ALL", //       조회기간전체: (ALL)/일주일(1WEEK)/1개월(1MONTH)/3개월(3MONTH)
-    progressStatus = "3", //     진행상태: 신청(1)/접수(2)/처리(3)/ 취소(0)
+    progressStatus = "ALL", //     진행상태: 신청(1)/접수(2)/처리(3)/ 취소(0)
   } = req.query;
 
   console.log(
@@ -189,7 +189,7 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
     doubleDataFlag,
     idx
   );
-  //http://localhost:3000/complaint/getApplicationCompaintDetail?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&idx=3
+  //http://localhost:3000/complaint/getApplicationCompaintDetail?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&idx=17
 
   try {
     let sRow = (pageNo - 1) * numOfRows;

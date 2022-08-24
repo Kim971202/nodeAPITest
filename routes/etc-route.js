@@ -19,7 +19,7 @@ router.get("/getSummaryInfoList", async (req, res, next) => {
     const sql = `SELECT a.idx, '공지사항' AS summaryTitle, count(a.start_date) AS summaryMSG
                 FROM t_notice a
                 INNER JOIN t_notice_send b
-                WHERE a.idx = b.idx AND DATE_FORMAT(a.start_date, '%Y%m%d%h%i%s') >= now() ${tSQL}
+                WHERE a.idx = b.idx AND DATE_FORMAT(a.start_date, '%Y-%m-%d') = DATE_FORMAT(now(), '%Y-%m-%d') ${tSQL}
                 UNION ALL
                 SELECT idx, '택배' AS summaryTitle, count(arrival_time) AS summaryMSG
                 FROM t_delivery

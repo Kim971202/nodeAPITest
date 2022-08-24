@@ -311,8 +311,8 @@ router.get("/getVoteResult", async (req, res, next) => {
       voteDesc = resultList[0].voteDesc;
       vStartDate = resultList[0].vStartDate;
       vEndDate = resultList[0].vEndDate;
-      subjectsNum = resultList[0].voteResult;
-      participationNum = resultList[0].voteResult;
+      subjectsNum = resultList[0].subjectsNum;
+      participationNum = resultList[0].participationNum;
       voteRate = resultList[0].voteRate;
     }
 

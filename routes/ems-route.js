@@ -199,7 +199,6 @@ router.get("/getYearEnergyUse", async (req, res, next) => {
 
   console.log(serviceKey, dongCode, hoCode, energyType, reqYear);
   //http://localhost:3000/ems/getYearEnergyUse?serviceKey=22222&dongCode=101&hoCode=101&energyType=elec&reqYear=2022
-
   try {
     const sql = "CALL spYearEnergyUse (?, ?, ?, ?);";
 
