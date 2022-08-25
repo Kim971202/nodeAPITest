@@ -49,7 +49,7 @@ router.get("/getApplicationCompaintType", async (req, res, next) => {
     // console.log("resultCnt[0].cnt : ", resultCnt[0].cnt);
 
     let jsonResult = {
-      resultCode: "0000",
+      resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
       pageNo,
@@ -93,7 +93,7 @@ router.get("/getApplicationComplaintList", async (req, res, next) => {
     viewPeriod,
     progressStatus
   );
-  //http://localhost:3000/complaint/getApplicationCompaintList?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&appCode=ALL&viewPeriod=ALL&progressStatus=3
+  //http://localhost:3000/complaint/getApplicationComplaintList?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&appCode=ALL&viewPeriod=ALL&progressStatus=3
 
   let appCode_ = appCode === "ALL" ? "%" : appCode;
 
@@ -201,7 +201,7 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
 
     let sql = `select a.idx, a.app_title as appTitle, DATE_FORMAT(a.app_date, '%Y%m%d%h%i%s') as appDate, 
                       a.app_code as appCode, b.app_name as appName, a.app_content as appContent, a.progress_status as progressStatus,
-                      app_receipt_date as appReceiptDate,  DATE_FORMAT(a.app_complete_date, '%Y%m%d%h%i') as appCompleteDate
+                      DATE_FORMAT(a.app_receipt_date, '%Y%m%d%h%i') as appReceiptDate,  DATE_FORMAT(a.app_complete_date, '%Y%m%d%h%i') as appCompleteDate
                from t_application_complaint a inner join t_complaints_type b
                on a.app_code = b.app_code
                where a.idx = ? `;
