@@ -213,6 +213,12 @@ router.get("/getYearEnergyUse", async (req, res, next) => {
     const data = await pool.query(sql, [energyType, reqYear, dongCode, hoCode]);
     let resultList = data[0];
 
+    console.log(resultList[0][0].reqYear);
+    // TODO: DB에서 호출시 null값이 나옴
+    // 일단 테스트를 위해 강제로 year 입력
+    let forceYear = 2022;
+    resultList[0][0].reqYear = forceYear;
+    ////////////////////////////////////
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
@@ -233,10 +239,11 @@ router.get("/getMonthEnergyUseGraph", async (req, res, next) => {
     hoCode = "0000", //          호코드
     energyType = "0000", //      에너지종류
     reqYear = "0000", //         요청년도
+    reqMonth = "0000", //        요청월
   } = req.query;
 
   console.log(serviceKey, dongCode, hoCode, energyType, reqYear);
-  //http://localhost:3000/ems/getMonthEnergyUseGraph?serviceKey=22222&dongCode=101&hoCode=101&energyType=elec&reqYear=2022
+  //http://localhost:3000/ems/getMonthEnergyUseGraph?serviceKey=22222&dongCode=101&hoCode=101&energyType=elec&reqYear=2022&reqMonth=06
 
   try {
     const sql = "CALL spMonthEnergyUseByYear (?, ?, ?, ?)";
@@ -254,6 +261,7 @@ router.get("/getMonthEnergyUseGraph", async (req, res, next) => {
         hoCode,
         energyType,
         reqYear,
+        reqMonth,
         items: resultList[0],
       },
     };
