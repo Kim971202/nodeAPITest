@@ -19,6 +19,7 @@ router.get("/getVoteAgendaList", async (req, res, next) => {
     dongCode = "0000", //        동코드
     hoCode = "0000", //          호코드
     viewPeriod = "ALL", //       조회기간전체: (ALL)/일주일(1WEEK)/1개월(1MONTH)/3개월(3MONTH)
+    voteResult = "ALL", //        ALL: 전체보기 N: 투표하기(진행중) Y: 결과보기(투표마감)
   } = req.query;
 
   console.log(
@@ -28,7 +29,8 @@ router.get("/getVoteAgendaList", async (req, res, next) => {
     dongCode,
     hoCode,
     doubleDataFlag,
-    viewPeriod
+    viewPeriod,
+    voteResult
   );
   //http://localhost:3000/vote/getVoteAgendaList?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&viewPeriod=ALL
 
