@@ -112,7 +112,7 @@ router.get("/getApplicationComplaintList", async (req, res, next) => {
 
     // 문서상 삭제된 a.app_content, 삭제
     let sql = `select a.idx, a.app_title as appTitle, DATE_FORMAT(a.app_date, '%Y%m%d%h%i%s') as appDate, 
-                      a.app_code as appCode, a.progress_status as progressStatus 
+                      a.app_code as appCode, a.app_content as appName, a.progress_status as progressStatus 
                from t_application_complaint a inner join t_complaints_type b
                on a.app_code = b.app_code
                where a.dong_code = ? and a.ho_code = ? and a.app_code like ? and a.app_date >= ? 
@@ -147,7 +147,7 @@ router.get("/getApplicationComplaintList", async (req, res, next) => {
     // console.log("resultCnt[0].cnt : ", resultCnt[0].cnt);
 
     let jsonResult = {
-      resultCode: "0000",
+      resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
       pageNo,
