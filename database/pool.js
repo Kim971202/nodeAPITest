@@ -1,6 +1,7 @@
 const mysql = require("mysql2/promise");
 // localhost - for local test
 // 43.200.134.34 - for cloud test
+// 43.200.134.141 - for cloud real
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,
   port: process.env.MYSQL_PORT,
