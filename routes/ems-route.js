@@ -77,13 +77,19 @@ router.get("/getNowEnergyUse", async (req, res, next) => {
   //http://localhost:3000/ems/getNowEnergyUse?serviceKey=22222&dongCode=101&hoCode=101
 
   try {
-    const sql = "CALL spNowEnergyUse (?, ?)";
+    const sql = "CALL spNowEnergyUse (?, ?) ";
 
     console.log("sql=>" + sql);
-
     const data = await pool.query(sql, [dongCode, hoCode]);
     let resultList = data[0];
 
+    let nowMonthUsage = "";
+    console.log(resultList.length);
+    if (resultList > 0) {
+      nowMonthUsage = resultList[0].items.nowMonthUsage;
+    }
+    // Formatter 사용
+    console.log("nowMonthUsage: " + resultList[0][0].nowMonthUsage);
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
