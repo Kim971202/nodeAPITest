@@ -88,6 +88,7 @@ router.get("/getContractDetail", async (req, res, next) => {
     let contractContent = "";
 
     resultList = data[0];
+    console.log(resultList);
     if (resultList.length > 0) {
       contractTitle = resultList[0].contractTitle;
       contractDate = resultList[0].contractDate;
@@ -95,7 +96,7 @@ router.get("/getContractDetail", async (req, res, next) => {
       contractContent = resultList[0].contractContent;
       filePath = resultList[0].filePath;
     }
-
+    console.log("filePath: " + filePath);
     //console.log(resultList[0].notiTitle);
 
     let jsonResult = {
