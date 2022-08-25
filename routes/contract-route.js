@@ -24,7 +24,7 @@ router.get("/getContractList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
-    const sql = `select idx, contract_title as contractTitle, DATE_FORMAT(contract_date, '%Y%m%d%h%i%s') as contractDate 
+    const sql = `select idx, contract_title as contractTitle, DATE_FORMAT(contract_date, '%Y%m%d') as contractDate 
                  from t_contract_document
                  limit ?, ?`;
     console.log("sql=>" + sql);
@@ -73,7 +73,7 @@ router.get("/getContractDetail", async (req, res, next) => {
   //http://localhost:3000/contract/getContractDetail?serviceKey=22222&dongCode=101&hoCode=101&idx=1
 
   try {
-    const sql = `select idx, contract_title as contractTitle, DATE_FORMAT(contract_date, '%Y%m%d%h%i%s') as contractDate, 
+    const sql = `select idx, contract_title as contractTitle, DATE_FORMAT(contract_date, '%Y%m%d') as contractDate, 
                         file_name as fileName, file_path as filePath, contract_content as contractContent
                  from t_contract_document
                  where idx = ? `;
