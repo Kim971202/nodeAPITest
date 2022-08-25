@@ -148,7 +148,7 @@ router.get("/getParkingResvList", async (req, res, next) => {
 
     // 문서상 visStartCnt 삭제되어 해당 구문 제거
     // DATEDIFF(vis_end_date, vis_start_date) as visStartCnt,
-    let sql = `select resv_no as resvNo, DATE_FORMAT(vis_start_date, '%Y%m%d%h%i%s') as visStartDate, 
+    let sql = `select resv_no as resvNo, DATE_FORMAT(vis_start_date, '%Y%m%d') as visStartDate, 
                         car_no as carNo, 
                         inout_flag as inCarFlag `;
     const fSQL =
