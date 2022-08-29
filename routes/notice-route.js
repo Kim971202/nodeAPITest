@@ -41,7 +41,7 @@ router.get("/getNoticeList", async (req, res, next) => {
     const tSQL =
       " and b.dong_code ='" + dongCode + "' and b.ho_code = '" + hoCode + "' ";
 
-    const sql = `select a.idx, a.noti_type as notiType, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d%h%i%s') as startDate 
+    const sql = `select a.idx, a.noti_type as notiType, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d') as startDate 
                  from t_notice a
                  inner join  t_notice_send b 
                  where  a.idx = b.idx and a.start_date <= now() and end_date >= now() and a.noti_type LIKE ?  ${tSQL}
@@ -101,7 +101,7 @@ router.get("/getNoticeDetail", async (req, res, next) => {
     const tSQL =
       " and b.dong_code ='" + dongCode + "' and b.ho_code = '" + hoCode + "' ";
 
-    const sql = `select a.idx, a.noti_type as notiType, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d%h%i%s') as startDate, noti_content as notiContent, a.noti_owner as notiOwner 
+    const sql = `select a.idx, a.noti_type as notiType, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d') as startDate, noti_content as notiContent, a.noti_owner as notiOwner 
                  from t_notice a
                  inner join  t_notice_send b 
                  where a.idx = ?  ${tSQL}`;
