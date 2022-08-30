@@ -46,11 +46,14 @@ router.get("/getVoteAgendaList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
-    let sql = `select idx, vote_title as voteTitle, 
-                      DATE_FORMAT(v_start_dtime, '%Y%m%d%h%i%s') as vStartDate, 
-                      DATE_FORMAT(v_end_dtime, '%Y%m%d%h%i%s') as vEndDate, 
-                      vote_end_flag as voteResult
-               from t_vote_agenda
+    let sql = `select a.idx, a.vote_title as voteTitle, 
+                      DATE_FORMAT(a.v_start_dtime, '%Y%m%d%h%i%s') as vStartDate, 
+                      DATE_FORMAT(a.v_end_dtime, '%Y%m%d%h%i%s') as vEndDate, 
+                      a.vote_end_flag as voteResult,
+                      ifnull(b.idx, 0) as joinResult
+                      from t_vote_agenda a 
+                            left join (select idx from t_voters  where dong_code = '${dongCode}' and ho_code = '${hoCode}') b
+                            on a.idx = b.idx
                where v_start_dtime >= ? 
                limit ?, ? `;
 
