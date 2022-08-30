@@ -261,7 +261,6 @@ router.get("/getMonthEnergyUseGraph", async (req, res, next) => {
         hoCode,
         energyType,
         reqYear,
-        reqMonth,
         items: resultList[0],
       },
     };
