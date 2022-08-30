@@ -36,7 +36,7 @@ router.get("/getParkingIOList", async (req, res, next) => {
   );
   //http://localhost:3000/parking/getParkingIOList?serviceKey=22222&numOfRows=5&pageNo=2&dongCode=101&hoCode=101&doubleDataFlag=Y&viewPeriod=ALL&carNo=9999&carFlag=HOUSEHOLD
 
-  let carNo_ = carNo === "9999" ? "%" : carNo;
+  let carNo_ = carNo === "ALL" ? "%" : carNo;
 
   let carFlag_ = "%";
   if (carFlag === "HOUSEHOLD") carFlag_ = "세대";
