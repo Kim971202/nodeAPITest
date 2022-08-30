@@ -216,7 +216,7 @@ router.get("/getYearEnergyUse", async (req, res, next) => {
     console.log(resultList[0][0].reqYear);
     // TODO: DB에서 호출시 null값이 나옴
     // 일단 테스트를 위해 강제로 year 입력
-    let forceYear = 2022;
+    let forceYear = "2022";
     resultList[0][0].reqYear = forceYear;
     ////////////////////////////////////
     let jsonResult = {
