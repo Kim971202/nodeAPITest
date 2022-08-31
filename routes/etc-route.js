@@ -46,6 +46,8 @@ router.get("/getSummaryInfoList", async (req, res, next) => {
     let summaryTitle = "";
     let summaryMSG = "";
 
+    let emerMSG = "비상건수";
+
     console.log("resultListLength: " + resultList.length);
     // summaryMSG가 0인경우 배열에서 제거하는 for문
     for (i = 0; i < resultList.length; i++) {
@@ -53,6 +55,8 @@ router.get("/getSummaryInfoList", async (req, res, next) => {
       summaryMSG = resultList[i].summaryMSG;
       console.log("summaryTitle: " + summaryTitle);
       console.log("summaryMGS: " + summaryMSG);
+      summaryMSG = emerMSG;
+      console.log("summaryMSG1212: " + summaryMSG);
       if (resultList[i].summaryMSG == 0) {
         console.log(
           "resultList[" + i + "]summaryMSG: " + resultList[i].summaryMSG

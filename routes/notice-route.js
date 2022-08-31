@@ -36,7 +36,7 @@ router.get("/getNoticeList", async (req, res, next) => {
     let notiType_ = "%";
     if (notiType === "1") notiType_ = "전체";
     else if (notiType === "2") notiType_ = "개별";
-    console.log("notiType_=>" + notiType_);
+    console.log("notiType_=> " + notiType_);
 
     const sql3 = `UPDATE t_notice a 
                   INNER JOIN t_notice_send b 
@@ -44,11 +44,8 @@ router.get("/getNoticeList", async (req, res, next) => {
                   SET a.new_flag = IF (DATE_ADD(a.start_date, INTERVAL 3 DAY)  >=now(), 'Y', 'N')
                   WHERE a.idx = b.idx;`;
     const data3 = await pool.query(sql3);
+    console.log("data3: " + data3);
 
-    function callData3() {
-      data3;
-    }
-    callData3();
     const tSQL =
       " and b.dong_code ='" + dongCode + "' and b.ho_code = '" + hoCode + "' ";
 
@@ -56,7 +53,7 @@ router.get("/getNoticeList", async (req, res, next) => {
                  from t_notice a
                  inner join  t_notice_send b 
                  where  a.idx = b.idx and a.start_date <= now() and end_date >= now() and a.noti_type LIKE ?  ${tSQL}
-                `;
+                 limit ?, ?`;
     console.log("sql=>" + sql);
 
     const data = await pool.query(sql, [notiType_, Number(sRow), Number(size)]);

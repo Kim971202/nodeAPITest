@@ -22,6 +22,9 @@ const emsRoute = require("./routes/ems-route");
 //////////////////////////////////////////////
 const etcRoute = require("./routes/etc-route");
 //////////////////////////////////////////////
+
+const redisRouter = require("./routes/redis-route");
+
 const app = express();
 const port = 3000; // 서버 포트번호
 
@@ -45,6 +48,7 @@ app.use("/contract", contractRoute);
 app.use("/homeInfo", homeInfoRoute);
 app.use("/ems", emsRoute);
 app.use("/etc", etcRoute);
+app.use("/redis", redisRouter);
 
 app.listen(port, () => {
   console.log(`서버가 실행됩니다. http://localhost:${port}`);
