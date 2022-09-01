@@ -9,6 +9,33 @@ let {
   getDateOfMonthByFlag,
 } = require("../module/date-function");
 
+//사용가능한 EnergyType 조회
+router.get("/getEnergyType", async (req, res, next) => {
+  let {
+    serviceKey = "111111111", // 서비스 인증키
+  } = req.query;
+
+  console.log(serviceKey);
+  //http://localhost:3000/ems/getEnergyType?serviceKey=22222
+  try {
+    const sql = `SELECT energy_type AS energyType FROM t_energy_setting`;
+    const data = await pool.query(sql);
+    let resultList = data[0];
+
+    let jsonResult = {
+      resultCode: "00",
+      resultMsg: "NORMAL_SERVICE",
+      data: {
+        resultList,
+      },
+    };
+
+    return res.json(jsonResult);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
 //목표값 설정
 router.post("/postEnergyUseTargetSet", async (req, res, next) => {
   console.log(JSON.stringify(req.body));
