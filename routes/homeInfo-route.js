@@ -60,6 +60,10 @@ router.get("/getHomeIPList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+<<<<<<< HEAD
+=======
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {

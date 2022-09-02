@@ -1,7 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+<<<<<<< HEAD
 //const dotenv = require("dotenv");
 //dotenv.config();
+=======
+
+const dotenv = require("dotenv");
+dotenv.config();
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
 const noticeRoute = require("./routes/notice-route");
 const mngFeeRoute = require("./routes/mngfee-route");
@@ -19,6 +25,14 @@ const logRoute = require("./routes/log-route");
 const contractRoute = require("./routes/contract-route");
 const homeInfoRoute = require("./routes/homeInfo-route");
 const emsRoute = require("./routes/ems-route");
+<<<<<<< HEAD
+=======
+//////////////////////////////////////////////
+const etcRoute = require("./routes/etc-route");
+//////////////////////////////////////////////
+
+const redisRouter = require("./routes/redis-route");
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
 const app = express();
 const port = 3000; // 서버 포트번호
@@ -42,6 +56,11 @@ app.use("/log", logRoute);
 app.use("/contract", contractRoute);
 app.use("/homeInfo", homeInfoRoute);
 app.use("/ems", emsRoute);
+<<<<<<< HEAD
+=======
+app.use("/etc", etcRoute);
+app.use("/redis", redisRouter);
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
 app.listen(port, () => {
   console.log(`서버가 실행됩니다. http://localhost:${port}`);

@@ -1,2 +1,14 @@
+<<<<<<< HEAD
 node_modules
 .env
+=======
+# dependencies
+node_modules
+node_modules/.bin
+
+# secret file
+.env
+
+# test json file
+test.json
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c

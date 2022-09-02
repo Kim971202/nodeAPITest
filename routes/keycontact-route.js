@@ -55,7 +55,11 @@ router.get("/getKeyContactList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+<<<<<<< HEAD
     const sql = `select phone_num as phoneNum, contact_flag as contactFlag, facility_name as facilityName 
+=======
+    const sql = `select contact_flag as contactFlagName, facility_name as facilityName, phone_num as phoneNum 
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                  from t_key_contact
                  where contact_flag LIKE ? and facility_name LIKE ?
                  limit ?, ?`;
@@ -82,6 +86,10 @@ router.get("/getKeyContactList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+<<<<<<< HEAD
+=======
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {

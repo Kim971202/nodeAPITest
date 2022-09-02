@@ -1,7 +1,61 @@
 {
+<<<<<<< HEAD
   "serviceKey": "11111111",
   "dongCode": "101",
   "hoCode": "101",
   "idx": "3",
   "choiceItemNo": "1"
+=======
+  "resultCode": "00",
+  "resultMsg": "NORMAL_SERVICE",
+  "numOfRows": "10",
+  "pageNo": "1",
+  "totalCount": "6",
+  "doubleDataFlag": "N",
+  "data": {
+    "dongCode": "101",
+    "hoCode": "101",
+    "carNo": "ALL",
+    "inCarFlag": "ALL",
+    "viewPeriod": "ALL",
+    "items": [
+      {
+        "resvNo": 7,
+        "visStartDate": "20220630120000",
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "resvNo": 8,
+        "visStartDate": "20220701120000",
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "resvNo": 9,
+        "visStartDate": "20220702120000",
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "resvNo": 10,
+        "visStartDate": "20220703120000",
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "resvNo": 11,
+        "visStartDate": "20220704120000",
+        "carNo": "1허1111",
+        "inCarFlag": "N"
+      },
+      {
+        "resvNo": 50,
+        "visStartDate": "20220629120000",
+        "carNo": "1가1269",
+        "inCarFlag": "N"
+      }
+    ]
+  }
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 }

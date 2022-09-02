@@ -9,6 +9,36 @@ let {
   getDateOfMonthByFlag,
 } = require("../module/date-function");
 
+<<<<<<< HEAD
+=======
+//사용가능한 EnergyType 조회
+router.get("/getEnergyType", async (req, res, next) => {
+  let {
+    serviceKey = "111111111", // 서비스 인증키
+  } = req.query;
+
+  console.log(serviceKey);
+  //http://localhost:3000/ems/getEnergyType?serviceKey=22222
+  try {
+    const sql = `SELECT energy_type AS energyType FROM t_energy_setting`;
+    const data = await pool.query(sql);
+    let resultList = data[0];
+
+    let jsonResult = {
+      resultCode: "00",
+      resultMsg: "NORMAL_SERVICE",
+      data: {
+        resultList,
+      },
+    };
+
+    return res.json(jsonResult);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 //목표값 설정
 router.post("/postEnergyUseTargetSet", async (req, res, next) => {
   console.log(JSON.stringify(req.body));
@@ -77,6 +107,7 @@ router.get("/getNowEnergyUse", async (req, res, next) => {
   //http://localhost:3000/ems/getNowEnergyUse?serviceKey=22222&dongCode=101&hoCode=101
 
   try {
+<<<<<<< HEAD
     const sql = "CALL spNowEnergyUse (?, ?)";
 
     console.log("sql=>" + sql);
@@ -84,6 +115,21 @@ router.get("/getNowEnergyUse", async (req, res, next) => {
     const data = await pool.query(sql, [dongCode, hoCode]);
     let resultList = data[0];
 
+=======
+    const sql = "CALL spNowEnergyUse (?, ?) ";
+
+    console.log("sql=>" + sql);
+    const data = await pool.query(sql, [dongCode, hoCode]);
+    let resultList = data[0];
+
+    let nowMonthUsage = "";
+    console.log(resultList.length);
+    if (resultList > 0) {
+      nowMonthUsage = resultList[0].items.nowMonthUsage;
+    }
+    // Formatter 사용
+    console.log("nowMonthUsage: " + resultList[0][0].nowMonthUsage);
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
@@ -199,7 +245,10 @@ router.get("/getYearEnergyUse", async (req, res, next) => {
 
   console.log(serviceKey, dongCode, hoCode, energyType, reqYear);
   //http://localhost:3000/ems/getYearEnergyUse?serviceKey=22222&dongCode=101&hoCode=101&energyType=elec&reqYear=2022
+<<<<<<< HEAD
 
+=======
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
   try {
     const sql = "CALL spYearEnergyUse (?, ?, ?, ?);";
 
@@ -208,6 +257,15 @@ router.get("/getYearEnergyUse", async (req, res, next) => {
     const data = await pool.query(sql, [energyType, reqYear, dongCode, hoCode]);
     let resultList = data[0];
 
+<<<<<<< HEAD
+=======
+    console.log(resultList[0][0].reqYear);
+    // TODO: DB에서 호출시 null값이 나옴
+    // 일단 테스트를 위해 강제로 year 입력
+    let forceYear = "2022";
+    resultList[0][0].reqYear = forceYear;
+    ////////////////////////////////////
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
@@ -228,10 +286,18 @@ router.get("/getMonthEnergyUseGraph", async (req, res, next) => {
     hoCode = "0000", //          호코드
     energyType = "0000", //      에너지종류
     reqYear = "0000", //         요청년도
+<<<<<<< HEAD
   } = req.query;
 
   console.log(serviceKey, dongCode, hoCode, energyType, reqYear);
   //http://localhost:3000/ems/getMonthEnergyUseGraph?serviceKey=22222&dongCode=101&hoCode=101&energyType=elec&reqYear=2022
+=======
+    reqMonth = "0000", //        요청월
+  } = req.query;
+
+  console.log(serviceKey, dongCode, hoCode, energyType, reqYear);
+  //http://localhost:3000/ems/getMonthEnergyUseGraph?serviceKey=22222&dongCode=101&hoCode=101&energyType=elec&reqYear=2022&reqMonth=06
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
   try {
     const sql = "CALL spMonthEnergyUseByYear (?, ?, ?, ?)";

@@ -36,12 +36,28 @@ router.get("/getNoticeList", async (req, res, next) => {
     let notiType_ = "%";
     if (notiType === "1") notiType_ = "전체";
     else if (notiType === "2") notiType_ = "개별";
+<<<<<<< HEAD
     console.log("notiType_=>" + notiType_);
+=======
+    console.log("notiType_=> " + notiType_);
+
+    const sql3 = `UPDATE t_notice a 
+                  INNER JOIN t_notice_send b 
+                  ON a.idx = b.idx
+                  SET a.new_flag = IF (DATE_ADD(a.start_date, INTERVAL 3 DAY)  >=now(), 'Y', 'N')
+                  WHERE a.idx = b.idx;`;
+    const data3 = await pool.query(sql3);
+    console.log("data3: " + data3);
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
     const tSQL =
       " and b.dong_code ='" + dongCode + "' and b.ho_code = '" + hoCode + "' ";
 
+<<<<<<< HEAD
     const sql = `select a.idx, a.noti_type as notiType, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d') as startDate 
+=======
+    const sql = `select a.idx, a.noti_type as notiType, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d') as startDate, a.new_flag as newFlag
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                  from t_notice a
                  inner join  t_notice_send b 
                  where  a.idx = b.idx and a.start_date <= now() and end_date >= now() and a.noti_type LIKE ?  ${tSQL}
@@ -54,18 +70,29 @@ router.get("/getNoticeList", async (req, res, next) => {
     const sql2 = `select count(a.idx) as cnt
                  from t_notice a
                  inner join  t_notice_send b 
+<<<<<<< HEAD
                  where a.idx = b.idx and a.start_date <= now() and end_date >= now() and a.noti_type LIKE ?  ${tSQL}`;
     //const sql2 = "select count(*) as cnt from t_notice where noti_type = ?";
 
     const data2 = await pool.query(sql2, [notiType_]);
 
+=======
+                 where a.idx = b.idx and a.start_date <= now() and end_date >= now() and a.noti_type LIKE ?  ${tSQL};`;
+    //const sql2 = "select count(*) as cnt from t_notice where noti_type = ?";
+    const data2 = await pool.query(sql2, [notiType_]);
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     let resultCnt = data2[0];
 
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
+<<<<<<< HEAD
       pageNo,
       numOfRows,
+=======
+      numOfRows,
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
@@ -76,7 +103,11 @@ router.get("/getNoticeList", async (req, res, next) => {
         items: resultList,
       },
     };
+<<<<<<< HEAD
     console.log(resultList);
+=======
+    // console.log(resultList);
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
     return res.json(jsonResult);
   } catch (err) {
@@ -101,7 +132,11 @@ router.get("/getNoticeDetail", async (req, res, next) => {
     const tSQL =
       " and b.dong_code ='" + dongCode + "' and b.ho_code = '" + hoCode + "' ";
 
+<<<<<<< HEAD
     const sql = `select a.idx, a.noti_type as notiType, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d') as startDate, noti_content as notiContent, a.noti_owner as notiOwner 
+=======
+    const sql = `select a.idx, a.noti_type as notiType, a.noti_owner as notiOwner,a.file_path as filePath, a.file_name as fileName, a.noti_title as notiTitle, DATE_FORMAT(a.start_date, '%Y%m%d') as startDate, noti_content as notiContent 
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                  from t_notice a
                  inner join  t_notice_send b 
                  where a.idx = ?  ${tSQL}`;
@@ -113,6 +148,12 @@ router.get("/getNoticeDetail", async (req, res, next) => {
     let startDate = "";
     let notiContent = "";
     let notiOwner = "";
+<<<<<<< HEAD
+=======
+    let notiType = "";
+    let filePath = "";
+    let fileName = "";
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
     resultList = data[0];
     if (resultList.length > 0) {
@@ -120,8 +161,17 @@ router.get("/getNoticeDetail", async (req, res, next) => {
       startDate = resultList[0].startDate;
       notiContent = resultList[0].notiContent;
       notiOwner = resultList[0].notiOwner;
+<<<<<<< HEAD
     }
 
+=======
+      notiType = resultList[0].notiType;
+      filePath = resultList[0].filePath;
+      fileName = resultList[0].fileName;
+    }
+    console.log("notiOwner: " + notiOwner);
+    console.log("notiType: " + notiType);
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     //console.log(resultList[0].notiTitle);
 
     let jsonResult = {
@@ -129,10 +179,19 @@ router.get("/getNoticeDetail", async (req, res, next) => {
       resultMsg: "NORMAL_SERVICE",
       data: {
         idx,
+<<<<<<< HEAD
+=======
+        notiType,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
         notiTitle,
         startDate,
         notiOwner,
         notiContent,
+<<<<<<< HEAD
+=======
+        fileName,
+        filePath,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       },
     };
 

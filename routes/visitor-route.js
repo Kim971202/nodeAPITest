@@ -38,7 +38,11 @@ router.get("/getVisitorList", async (req, res, next) => {
 
   let fSQL = ` where dong_code = '${dongCode}' and ho_code = '${hoCode}'  and occur_dtime >= '${occurDTime}' `;
 
+<<<<<<< HEAD
   let hSQL = `select DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime, 
+=======
+  let hSQL = `select DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime,  
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                 '새대현관' as occurLocName, IFNULL(file_path, '') as filePath, IFNULL(file_name, '') as fileNath
               from t_home_visit_video_log  `;
 
@@ -79,11 +83,19 @@ router.get("/getVisitorList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+<<<<<<< HEAD
+=======
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt + "",
       doubleDataFlag,
       data: {
         dongCode,
         hoCode,
+<<<<<<< HEAD
+=======
+        occurLocFlag,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
         viewPeriod,
         items: resultList,
       },

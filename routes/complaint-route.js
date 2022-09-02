@@ -31,7 +31,11 @@ router.get("/getApplicationCompaintType", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+<<<<<<< HEAD
     const sql = `select app_code as appCode, app_name as appName
+=======
+    const sql = `select app_code as appCode, app_name as appCodeName
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                  from t_complaints_type 
                  order by app_code, sort_order
                  limit ?, ?`;
@@ -49,9 +53,16 @@ router.get("/getApplicationCompaintType", async (req, res, next) => {
     // console.log("resultCnt[0].cnt : ", resultCnt[0].cnt);
 
     let jsonResult = {
+<<<<<<< HEAD
       resultCode: "0000",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+=======
+      resultCode: "00",
+      resultMsg: "NORMAL_SERVICE",
+      numOfRows,
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
@@ -68,7 +79,11 @@ router.get("/getApplicationCompaintType", async (req, res, next) => {
 });
 
 //민원신청현황 목록조회
+<<<<<<< HEAD
 router.get("/getApplicationCompaintList", async (req, res, next) => {
+=======
+router.get("/getApplicationComplaintList", async (req, res, next) => {
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
   let {
     serviceKey = "111111111", // 서비스 인증키
     numOfRows = 10, //           페이지 당 결과수
@@ -78,6 +93,10 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
     hoCode = "0000", //          호코드
     appCode = "ALL", //          민원유형: 전체(ALL)/월패드에서 호출 시 : 1(보수신청)
     viewPeriod = "ALL", //       조회기간전체: (ALL)/일주일(1WEEK)/1개월(1MONTH)/3개월(3MONTH)
+<<<<<<< HEAD
+=======
+    progressStatus = "ALL", //     진행상태: 신청(1)/접수(2)/처리(3)/ 취소(0)
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
   } = req.query;
 
   console.log(
@@ -88,9 +107,16 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
     hoCode,
     doubleDataFlag,
     appCode,
+<<<<<<< HEAD
     viewPeriod
   );
   //http://localhost:3000/complaint/getApplicationCompaintList?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&appCode=ALL&viewPeriod=ALL
+=======
+    viewPeriod,
+    progressStatus
+  );
+  //http://localhost:3000/complaint/getApplicationComplaintList?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&appCode=ALL&viewPeriod=ALL&progressStatus=3
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
   let appCode_ = appCode === "ALL" ? "%" : appCode;
 
@@ -107,8 +133,14 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+<<<<<<< HEAD
     let sql = `select a.idx, a.app_title as appTitle, DATE_FORMAT(a.app_date, '%Y%m%d%h%i%s') as appDate, 
                       a.app_code as appCode, a.app_content, a.progress_status 
+=======
+    // 문서상 삭제된 a.app_content, 삭제
+    let sql = `select a.idx, a.app_title as appTitle, DATE_FORMAT(a.app_date, '%Y%m%d%h%i%s') as appDate, 
+                      a.app_code as appCode, a.app_content as appName, a.progress_status as progressStatus 
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                from t_application_complaint a inner join t_complaints_type b
                on a.app_code = b.app_code
                where a.dong_code = ? and a.ho_code = ? and a.app_code like ? and a.app_date >= ? 
@@ -143,9 +175,16 @@ router.get("/getApplicationCompaintList", async (req, res, next) => {
     // console.log("resultCnt[0].cnt : ", resultCnt[0].cnt);
 
     let jsonResult = {
+<<<<<<< HEAD
       resultCode: "0000",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+=======
+      resultCode: "00",
+      resultMsg: "NORMAL_SERVICE",
+      numOfRows,
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
@@ -184,7 +223,11 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
     doubleDataFlag,
     idx
   );
+<<<<<<< HEAD
   //http://localhost:3000/complaint/getApplicationCompaintDetail?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&idx=1
+=======
+  //http://localhost:3000/complaint/getApplicationCompaintDetail?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&idx=17
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
   try {
     let sRow = (pageNo - 1) * numOfRows;
@@ -196,7 +239,11 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
 
     let sql = `select a.idx, a.app_title as appTitle, DATE_FORMAT(a.app_date, '%Y%m%d%h%i%s') as appDate, 
                       a.app_code as appCode, b.app_name as appName, a.app_content as appContent, a.progress_status as progressStatus,
+<<<<<<< HEAD
                       app_receipt_date as appReceiptDate,  DATE_FORMAT(a.app_complete_date, '%Y%m%d%h%i') as appCompleteDate
+=======
+                      DATE_FORMAT(a.app_receipt_date, '%Y%m%d%h%i') as appReceiptDate,  DATE_FORMAT(a.app_complete_date, '%Y%m%d%h%i') as appCompleteDate
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                from t_application_complaint a inner join t_complaints_type b
                on a.app_code = b.app_code
                where a.idx = ? `;
@@ -209,15 +256,28 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
     let appTitle = "";
     let appDate = "";
     let appContent = "";
+<<<<<<< HEAD
     let progressStatus = "";
     let appReceiptDate = "";
     let appCompleteDate;
+=======
+    let appName = "";
+    let appCode = "";
+    let progressStatus = "";
+    let appReceiptDate = "";
+    let appCompleteDate = "";
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
     resultList = data[0];
     if (resultList.length > 0) {
       appTitle = resultList[0].appTitle;
       appDate = resultList[0].appDate;
       appContent = resultList[0].appContent;
+<<<<<<< HEAD
+=======
+      appCode = resultList[0].appCode;
+      appName = resultList[0].appName;
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       progressStatus = resultList[0].progressStatus;
       appReceiptDate = resultList[0].appReceiptDate;
       appCompleteDate = resultList[0].appCompleteDate;
@@ -228,6 +288,7 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
+<<<<<<< HEAD
       idx,
       appTitle,
       appDate,
@@ -235,6 +296,21 @@ router.get("/getApplicationCompaintDetail", async (req, res, next) => {
       progressStatus,
       appReceiptDate,
       appCompleteDate,
+=======
+      data: {
+        dongCode,
+        hoCode,
+        idx,
+        appTitle,
+        appDate,
+        appCode,
+        appName,
+        appContent,
+        progressStatus,
+        appReceiptDate,
+        appCompleteDate,
+      },
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     };
 
     return res.json(jsonResult);

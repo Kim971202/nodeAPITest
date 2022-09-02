@@ -18,7 +18,11 @@ router.get("/getParkingIOList", async (req, res, next) => {
     doubleDataFlag = "Y", //     2배수 데이터 사용여부
     dongCode = "0000", //        동코드
     hoCode = "0000", //          호코드
+<<<<<<< HEAD
     carNo = "ALL", //            차량번호
+=======
+    carNo = "9999", //           차량번호
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     carFlag = "ALL", //          차량구분: 전체(ALL)/세대(HOUSEHOLD)/방문(VISIT)
     viewPeriod = "ALL", //       조회기간전체: (ALL)/일주일(1WEEK)/1개월(1MONTH)/3개월(3MONTH)
   } = req.query;
@@ -34,7 +38,11 @@ router.get("/getParkingIOList", async (req, res, next) => {
     carFlag,
     viewPeriod
   );
+<<<<<<< HEAD
   //http://localhost:3000/parking/getParkingIOList?serviceKey=22222&numOfRows=5&pageNo=2&dongCode=101&hoCode=101&doubleDataFlag=Y&L&carNo=ALL&carFlag=ALL&viewPeriod=ALL
+=======
+  //http://localhost:3000/parking/getParkingIOList?serviceKey=22222&numOfRows=5&pageNo=2&dongCode=101&hoCode=101&doubleDataFlag=Y&viewPeriod=ALL&carNo=9999&carFlag=HOUSEHOLD
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
   let carNo_ = carNo === "ALL" ? "%" : carNo;
 
@@ -84,11 +92,19 @@ router.get("/getParkingIOList", async (req, res, next) => {
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
       pageNo,
+<<<<<<< HEAD
       dongCode,
       hoCode,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
+=======
+      totalCount: resultCnt[0].cnt + "",
+      doubleDataFlag,
+      data: {
+        dongCode,
+        hoCode,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
         carNo,
         carFlag,
         viewPeriod,
@@ -146,9 +162,15 @@ router.get("/getParkingResvList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+<<<<<<< HEAD
     // DATEDIFF(vis_end_date, vis_start_date) as visStartCnt,
     let sql = `select DATE_FORMAT(vis_start_date, '%Y%m%d%h%i%s') as visStartDate, 
                         resv_no as resvNo,
+=======
+    // 문서상 visStartCnt 삭제되어 해당 구문 제거
+    // DATEDIFF(vis_end_date, vis_start_date) as visStartCnt,
+    let sql = `select resv_no as resvNo, DATE_FORMAT(vis_start_date, '%Y%m%d') as visStartDate, 
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                         car_no as carNo, 
                         inout_flag as inCarFlag `;
     const fSQL =

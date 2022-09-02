@@ -24,7 +24,11 @@ router.get("/getContractList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+<<<<<<< HEAD
     const sql = `select idx, contract_title as contractTitle, DATE_FORMAT(contract_date, '%Y%m%d%h%i%s') as contractDate 
+=======
+    const sql = `select idx, contract_title as contractTitle, DATE_FORMAT(contract_date, '%Y%m%d') as contractDate 
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                  from t_contract_document
                  limit ?, ?`;
     console.log("sql=>" + sql);
@@ -42,6 +46,10 @@ router.get("/getContractList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+<<<<<<< HEAD
+=======
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
@@ -72,8 +80,13 @@ router.get("/getContractDetail", async (req, res, next) => {
   //http://localhost:3000/contract/getContractDetail?serviceKey=22222&dongCode=101&hoCode=101&idx=1
 
   try {
+<<<<<<< HEAD
     const sql = `select idx, contract_title as contractTitle, DATE_FORMAT(contract_date, '%Y%m%d%h%i%s') as contractDate, 
                         file_name as fileName, contract_content as contractContent
+=======
+    const sql = `select idx, contract_title as contractTitle, DATE_FORMAT(contract_date, '%Y%m%d') as contractDate, 
+                        file_name as fileName, file_path as filePath, contract_content as contractContent
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                  from t_contract_document
                  where idx = ? `;
 
@@ -83,26 +96,51 @@ router.get("/getContractDetail", async (req, res, next) => {
     let contractTitle = "";
     let contractDate = "";
     let fileName = "";
+<<<<<<< HEAD
     let contractContent = "";
 
     resultList = data[0];
+=======
+    let filePath = "";
+    let contractContent = "";
+
+    resultList = data[0];
+    console.log(resultList);
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     if (resultList.length > 0) {
       contractTitle = resultList[0].contractTitle;
       contractDate = resultList[0].contractDate;
       fileName = resultList[0].fileName;
       contractContent = resultList[0].contractContent;
+<<<<<<< HEAD
     }
 
+=======
+      filePath = resultList[0].filePath;
+    }
+    console.log("filePath: " + filePath);
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     //console.log(resultList[0].notiTitle);
 
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
+<<<<<<< HEAD
       idx,
       contractTitle,
       contractDate,
       fileName,
       contractContent,
+=======
+      data: {
+        idx,
+        contractTitle,
+        contractDate,
+        fileName,
+        filePath,
+        contractContent,
+      },
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     };
 
     return res.json(jsonResult);

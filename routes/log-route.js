@@ -46,7 +46,11 @@ router.get("/getInoutLogList", async (req, res, next) => {
                           WHEN entry_method = 'B' THEN 'BLE'
                           ELSE '정보없음'
                       END
+<<<<<<< HEAD
                     ) as ioMethod
+=======
+                    ) as ioMethods
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
               from t_home_entry_log  `;
 
   let lSQL = `select DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime, 
@@ -93,11 +97,19 @@ router.get("/getInoutLogList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+<<<<<<< HEAD
+=======
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt + "",
       doubleDataFlag,
       data: {
         dongCode,
         hoCode,
+<<<<<<< HEAD
+=======
+        occurLocFlag,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
         viewPeriod,
         items: resultList,
       },
@@ -143,6 +155,7 @@ router.get("/getEmergencyLogList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+<<<<<<< HEAD
     const sql = `select DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime, 
                       (
                         CASE WHEN occur_loc_flag = 'HOUSE' THEN '세대'
@@ -150,6 +163,9 @@ router.get("/getEmergencyLogList", async (req, res, next) => {
                             ELSE '정보없음'
                         END
                       ) as occurLocName, 
+=======
+    const sql = `select idx, DATE_FORMAT(occur_dtime, '%Y%m%d%H%i%s') as occurDTime, 
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                       (
                         CASE WHEN emergency_type = 'invasion' THEN '침입'
                             WHEN emergency_type = 'emer' THEN '비상'
@@ -161,6 +177,15 @@ router.get("/getEmergencyLogList", async (req, res, next) => {
                         END
                       ) as emergencyType,
                       (
+<<<<<<< HEAD
+=======
+                        CASE WHEN occur_loc_loc = 'HOUSE' THEN '세대'
+                            WHEN occur_loc_loc = 'PUBLIC' THEN '공용부'
+                            ELSE '정보없음'
+                        END
+                      ) as occurLocName, 
+                      (
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                         CASE WHEN state = '0' THEN '발생'
                             WHEN state = '1' THEN '정지'
                             WHEN state = '2' THEN '복귀'
@@ -194,6 +219,10 @@ router.get("/getEmergencyLogList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+<<<<<<< HEAD
+=======
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {

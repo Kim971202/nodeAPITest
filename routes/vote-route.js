@@ -19,6 +19,10 @@ router.get("/getVoteAgendaList", async (req, res, next) => {
     dongCode = "0000", //        동코드
     hoCode = "0000", //          호코드
     viewPeriod = "ALL", //       조회기간전체: (ALL)/일주일(1WEEK)/1개월(1MONTH)/3개월(3MONTH)
+<<<<<<< HEAD
+=======
+    voteResult = "ALL", //        ALL: 전체보기 N: 투표하기(진행중) Y: 결과보기(투표마감)
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
   } = req.query;
 
   console.log(
@@ -28,7 +32,12 @@ router.get("/getVoteAgendaList", async (req, res, next) => {
     dongCode,
     hoCode,
     doubleDataFlag,
+<<<<<<< HEAD
     viewPeriod
+=======
+    viewPeriod,
+    voteResult
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
   );
   //http://localhost:3000/vote/getVoteAgendaList?serviceKey=222222&numOfRows=10&pageNo=1&doublDataFlag=Y&dongCode=101&hoCode=101&viewPeriod=ALL
 
@@ -44,11 +53,22 @@ router.get("/getVoteAgendaList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
+<<<<<<< HEAD
     let sql = `select idx, vote_title as voteTitle, 
                       DATE_FORMAT(v_start_dtime, '%Y%m%d%h%i%s') as vStartDate, 
                       DATE_FORMAT(v_end_dtime, '%Y%m%d%h%i%s') as vEndDate, 
                       vote_end_flag as voteResult
                from t_vote_agenda
+=======
+    let sql = `select a.idx, a.vote_title as voteTitle, 
+                      DATE_FORMAT(a.v_start_dtime, '%Y%m%d%h%i%s') as vStartDate, 
+                      DATE_FORMAT(a.v_end_dtime, '%Y%m%d%h%i%s') as vEndDate, 
+                      a.vote_end_flag as voteResult,
+                      ifnull(b.idx, 0) as joinResult
+                      from t_vote_agenda a 
+                            left join (select idx from t_voters  where dong_code = '${dongCode}' and ho_code = '${hoCode}') b
+                            on a.idx = b.idx
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
                where v_start_dtime >= ? 
                limit ?, ? `;
 
@@ -69,6 +89,10 @@ router.get("/getVoteAgendaList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
+<<<<<<< HEAD
+=======
+      pageNo,
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
@@ -114,15 +138,23 @@ router.get("/getVoteAgendaDetail", async (req, res, next) => {
 
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
+<<<<<<< HEAD
 
+=======
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     let sql = `select a.idx, a.vote_title as voteTitle, vote_desc as voteDesc,
                   DATE_FORMAT(a.v_start_dtime, '%Y%m%d%h%i%s') as vStartDate, 
                   DATE_FORMAT(a.v_end_dtime, '%Y%m%d%h%i%s') as vEndDate, 
                   a.vote_end_flag as voteResult,
                   b.item_no as itemNo, item_content as itemContent   
                from t_vote_agenda a inner join t_vote_items b
+<<<<<<< HEAD
                on a.idx = b.idx
                where a.vote_end_flag = 'Y' and a.idx = ? `;
+=======
+               on a.idx = b.idx 
+               where a.idx = ? `;
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
     console.log("sql=>" + sql);
 
@@ -162,7 +194,10 @@ router.get("/getVoteAgendaDetail", async (req, res, next) => {
       voteDesc,
       vStartDate,
       vEndDate,
+<<<<<<< HEAD
       voteResult,
+=======
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       voteItems,
     };
 
@@ -311,8 +346,13 @@ router.get("/getVoteResult", async (req, res, next) => {
       voteDesc = resultList[0].voteDesc;
       vStartDate = resultList[0].vStartDate;
       vEndDate = resultList[0].vEndDate;
+<<<<<<< HEAD
       subjectsNum = resultList[0].voteResult;
       participationNum = resultList[0].voteResult;
+=======
+      subjectsNum = resultList[0].subjectsNum;
+      participationNum = resultList[0].participationNum;
+>>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       voteRate = resultList[0].voteRate;
     }
 
