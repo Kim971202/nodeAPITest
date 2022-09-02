@@ -22,7 +22,7 @@ client.on("ready", () => {
 router.get("/", (req, res, next) => {
   try {
     client.get("k_two", (err, result) => {
-      console.log("result: " + result); // myVal
+      console.log("result: " + result); // v_two
       value = result;
     });
 
