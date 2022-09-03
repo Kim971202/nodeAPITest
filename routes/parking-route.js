@@ -18,11 +18,7 @@ router.get("/getParkingIOList", async (req, res, next) => {
     doubleDataFlag = "Y", //     2배수 데이터 사용여부
     dongCode = "0000", //        동코드
     hoCode = "0000", //          호코드
-<<<<<<< HEAD
     carNo = "ALL", //            차량번호
-=======
-    carNo = "9999", //           차량번호
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     carFlag = "ALL", //          차량구분: 전체(ALL)/세대(HOUSEHOLD)/방문(VISIT)
     viewPeriod = "ALL", //       조회기간전체: (ALL)/일주일(1WEEK)/1개월(1MONTH)/3개월(3MONTH)
   } = req.query;
@@ -38,11 +34,7 @@ router.get("/getParkingIOList", async (req, res, next) => {
     carFlag,
     viewPeriod
   );
-<<<<<<< HEAD
   //http://localhost:3000/parking/getParkingIOList?serviceKey=22222&numOfRows=5&pageNo=2&dongCode=101&hoCode=101&doubleDataFlag=Y&L&carNo=ALL&carFlag=ALL&viewPeriod=ALL
-=======
-  //http://localhost:3000/parking/getParkingIOList?serviceKey=22222&numOfRows=5&pageNo=2&dongCode=101&hoCode=101&doubleDataFlag=Y&viewPeriod=ALL&carNo=9999&carFlag=HOUSEHOLD
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
   let carNo_ = carNo === "ALL" ? "%" : carNo;
 
@@ -63,7 +55,7 @@ router.get("/getParkingIOList", async (req, res, next) => {
     //console.log("size= %d", size);
 
     const sql = `select DATE_FORMAT(inout_dtime, '%Y%m%d%h%i') as inoutDate, car_no as carNo, inout_flag as inoutFlag, car_flag as  carFlag
-                 from t_parking_io where dong_code = ? and ho_code = ? and car_no like ? and car_flag like ? and inout_dtime >= ?  
+                 from t_parking_io where dong_code = ? and ho_code = ? and car_no like ? and car_flag like ? and inout_dtime >= ?
                  limit ?, ?`;
 
     console.log("sql=>" + sql);
@@ -92,19 +84,11 @@ router.get("/getParkingIOList", async (req, res, next) => {
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
       pageNo,
-<<<<<<< HEAD
       dongCode,
       hoCode,
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {
-=======
-      totalCount: resultCnt[0].cnt + "",
-      doubleDataFlag,
-      data: {
-        dongCode,
-        hoCode,
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
         carNo,
         carFlag,
         viewPeriod,
@@ -162,16 +146,10 @@ router.get("/getParkingResvList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
-<<<<<<< HEAD
     // DATEDIFF(vis_end_date, vis_start_date) as visStartCnt,
-    let sql = `select DATE_FORMAT(vis_start_date, '%Y%m%d%h%i%s') as visStartDate, 
+    let sql = `select DATE_FORMAT(vis_start_date, '%Y%m%d%h%i%s') as visStartDate,
                         resv_no as resvNo,
-=======
-    // 문서상 visStartCnt 삭제되어 해당 구문 제거
-    // DATEDIFF(vis_end_date, vis_start_date) as visStartCnt,
-    let sql = `select resv_no as resvNo, DATE_FORMAT(vis_start_date, '%Y%m%d') as visStartDate, 
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
-                        car_no as carNo, 
+                        car_no as carNo,
                         inout_flag as inCarFlag `;
     const fSQL =
       " from t_parking_resv where dong_code = ? and ho_code = ? and car_no like ? and inout_flag like ? and vis_start_date >= ? ";
@@ -277,10 +255,10 @@ router.post("/postParkingResv", async (req, res, next) => {
       let vDate = visStartDate;
 
       let pSQL = `select month_max_day as monthMaxDays, max_num_per_day as maxNumPerDays,
-                      (select sum(datediff(vis_end_date, vis_start_date)+1) from t_parking_resv 
+                      (select sum(datediff(vis_end_date, vis_start_date)+1) from t_parking_resv
                       where vis_start_date >= '${sDate}' and vis_start_date<= '${eDate}' and dong_code = '${dongCode}' and ho_code = '${hoCode}'
                       group by dong_code, ho_code) as monthUseDays,
-                      (select count(datediff(vis_end_date, vis_start_date)+1) from t_parking_resv 
+                      (select count(datediff(vis_end_date, vis_start_date)+1) from t_parking_resv
                       where vis_start_date <= '${vDate}' and vis_end_date > '${vDate}' and dong_code = '${dongCode}' and ho_code = '${hoCode}'
                       group by dong_code, ho_code) as maxUseDays
                   from t_parking_resv_conf`;

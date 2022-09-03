@@ -44,22 +44,14 @@ router.get("/getElevatorCallLog", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
-<<<<<<< HEAD
-=======
     //     from t_elevator_control where dong_code = ? and ho_code = ? and control_req_dtime >= ?
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
-    const sql = `select DATE_FORMAT(control_req_dtime, '%Y%m%d%h%i%s') as controlReqDTime, 
+    const sql = `select DATE_FORMAT(control_req_dtime, '%Y%m%d%h%i%s') as controlReqDTime,
                       (
                         CASE WHEN comm_result = 'Y' THEN '성공'
                             ELSE '실패'
                         END
                       ) as  commResult
-<<<<<<< HEAD
-                 from t_elevator_control where dong_code = ? and ho_code = ? and control_req_dtime >= ?  
-                 limit ?, ?`;
-=======
                  from t_elevator_control where dong_code = ? and ho_code = ? and control_req_dtime >= ?;`;
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
     console.log("sql=>" + sql);
     const data = await pool.query(sql, [
@@ -84,10 +76,7 @@ router.get("/getElevatorCallLog", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
-<<<<<<< HEAD
-=======
       pageNo,
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {

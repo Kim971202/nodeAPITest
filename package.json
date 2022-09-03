@@ -5,11 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-    "dev": "nodemon --watch routes"
-=======
     "dev": "nodemon "
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
   },
   "keywords": [],
   "author": "",
@@ -18,11 +14,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "mysql": "^2.18.1",
-<<<<<<< HEAD
-    "mysql2": "^2.3.3"
-=======
     "mysql2": "^2.3.3",
     "redis": "^3.1.2"
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
   }
 }

@@ -33,7 +33,7 @@ router.get("/getHomeIPList", async (req, res, next) => {
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
     //console.log("size= %d", size);
 
-    const sql = `select dong_code as dongCode, ho_code as hoCode, wallpad_ip as wallpadIP 
+    const sql = `select dong_code as dongCode, ho_code as hoCode, wallpad_ip as wallpadIP
                  from t_hn_wallpad
                  where dong_code LIKE ? and ho_code LIKE ?
                  limit ?, ?`;
@@ -60,10 +60,7 @@ router.get("/getHomeIPList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
-<<<<<<< HEAD
-=======
       pageNo,
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {

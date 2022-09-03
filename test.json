@@ -1,11 +1,4 @@
 {
-<<<<<<< HEAD
-  "serviceKey": "11111111",
-  "dongCode": "101",
-  "hoCode": "101",
-  "idx": "3",
-  "choiceItemNo": "1"
-=======
   "resultCode": "00",
   "resultMsg": "NORMAL_SERVICE",
   "numOfRows": "10",
@@ -57,5 +50,4 @@
       }
     ]
   }
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 }

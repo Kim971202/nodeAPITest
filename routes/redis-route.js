@@ -18,10 +18,10 @@ client.on("error", (err) => {
 client.on("ready", () => {
   console.log("redis is ready");
 });
-
+var strr = "k_two";
 router.get("/", (req, res, next) => {
   try {
-    client.get("k_two", (err, result) => {
+    client.get(strr, (err, result) => {
       console.log("result: " + result); // v_two
       value = result;
     });

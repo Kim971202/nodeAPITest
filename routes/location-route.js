@@ -40,20 +40,20 @@ router.get("/getLocationList", async (req, res, next) => {
   let fSQL = "";
 
   if (locFlag === "FAMILY") {
-    fSQL = `select 0 as idx, 
+    fSQL = `select 0 as idx,
                     tag_id as tagId, tag_name as tagName, tag_desc as tagDesc, pos_desc as posDesc,
                     '' as floorName, '' as buildingName, '' as posX, '' as posY, '' as imgURL,
                     DATE_FORMAT(pos_update_date, '%Y%m%d%h%i%s') as posUpdateDate
-                    from t_family_loc 
+                    from t_family_loc
                     where dong_code = ? and ho_code = ?`;
 
     loc_tb = "t_family_loc";
   } else if (locFlag === "PARKING") {
-    fSQL = `select  idx, 
+    fSQL = `select  idx,
                     tag_id as tagId, tag_name as tagName, tag_desc as tagDesc, pos_desc as posDesc,
                     floor_name as floorName, building_name as buildingName, pos_x as posX, pos_y as posY, '' as imgURL,
                     DATE_FORMAT(pos_update_date, '%Y%m%d%h%i%s') as posUpdateDate
-                    from t_parking_loc 
+                    from t_parking_loc
                     where pos_update_date >= '${sDate}' and dong_code = ? and ho_code = ?`;
 
     loc_tb = "t_parking_loc";
@@ -92,10 +92,7 @@ router.get("/getLocationList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
-<<<<<<< HEAD
-=======
       pageNo,
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {

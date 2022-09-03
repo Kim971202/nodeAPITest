@@ -43,7 +43,7 @@ router.get("/getCCTVInfoList", async (req, res, next) => {
     const sql = `select a.cam_no as cctvNo, cam_name as cctvAlias, cam_address as cctvAddress
                  from t_cctv_dong a left join t_cctv b
                  on a.cam_no = b.cam_no
-                 where dong_code = ?  
+                 where dong_code = ?
                  limit ?, ?`;
 
     console.log("sql=>" + sql);
@@ -63,10 +63,7 @@ router.get("/getCCTVInfoList", async (req, res, next) => {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
       numOfRows,
-<<<<<<< HEAD
-=======
       pageNo,
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       totalCount: resultCnt[0].cnt + "",
       doubleDataFlag,
       data: {

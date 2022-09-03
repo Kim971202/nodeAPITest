@@ -28,8 +28,8 @@ router.get("/getManagementFeeList", async (req, res, next) => {
     let sRow = (pageNo - 1) * numOfRows;
     let size = numOfRows * (doubleDataFlag === "Y" ? 2 : 1);
 
-    const sql = `select mng_year as mngYear, mng_month as mngMonth, total_mng as totalMng 
-       from t_management_fee 
+    const sql = `select mng_year as mngYear, mng_month as mngMonth, total_mng as totalMng
+       from t_management_fee
        where mng_year = ? and dong_code = ? and ho_code = ? limit ?, ?`;
     const data = await pool.query(sql, [
       mngYear,
@@ -55,10 +55,6 @@ router.get("/getManagementFeeList", async (req, res, next) => {
       data: {
         dongCode,
         hoCode,
-<<<<<<< HEAD
-        mngYear,
-=======
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
         items: resultList,
       },
     };
@@ -79,13 +75,6 @@ router.get("/getManagementFeeDetail", async (req, res, next) => {
     mngYear = "0000", //         대상년도
     mngMonth = "0000", //        대상월
   } = req.query;
-<<<<<<< HEAD
-  console.log("dongCode: " + dongCode);
-  console.log("mngYear: " + mngYear);
-  console.log("mngMonth: " + mngMonth);
-=======
-
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
   console.log(serviceKey, dongCode, hoCode, mngYear, mngMonth);
   //http://localhost:3000/mngfee/getManagementFeeDetail?serviceKey=22222&dongCode=101&hoCode=101&mngYear=2022&mngMonth=06
 
@@ -107,36 +96,16 @@ router.get("/getManagementFeeDetail", async (req, res, next) => {
     // console.log("mngFeeItem=>" + mngFeeItem); //
     // console.log("mngFeeAlias=>" + mngFeeAlias);
 
-    const sql = `select ${mngFeeItem} from t_management_fee 
+    const sql = `select ${mngFeeItem} from t_management_fee
     where mng_year = ? and mng_month = ? and dong_code = ? and ho_code = ?`;
 
     const data = await pool.query(sql, [mngYear, mngMonth, dongCode, hoCode]);
     let resultList = data[0]; //
-<<<<<<< HEAD
-=======
     // console.log(resultList[0]);
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
 
     for (i = 0; i < mngFeeItem.length; i++) {
       mngFee[i] = resultList[0][mngFeeItem[i]];
     }
-<<<<<<< HEAD
-    const totalMng_sql = `select total_mng as totalMng from t_management_fee where mng_year = ${mngYear} and mng_month = ${mngMonth}`;
-    const totalMng_data = await pool.query(totalMng_sql);
-    let testList = "";
-    let totalMng = "";
-    testList = totalMng_data[0];
-
-    if (testList.length > 0) {
-      totalMng = testList[0].totalMng;
-    }
-    console.log("totalMng: " + totalMng);
-    //console.log("mngFee=>" + mngFee);
-    console.log("mngFee=>" + mngFee.length);
-    console.log("mngFeeItem=>" + mngFeeItem.length);
-    console.log("mngFeeAlias=>" + mngFeeAlias.length);
-
-=======
     //console.log("mngFee=>" + mngFee);
     console.log("mngFee=>" + mngFee.length);
     console.log("mngFeeItem=>" + mngFeeItem.length);
@@ -156,7 +125,6 @@ router.get("/getManagementFeeDetail", async (req, res, next) => {
     }
     console.log("totalMng: " + totalMng);
     //////////////////////////////////////////////////////////////////////////////////
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
     let jsonResult = {
       resultCode: "00",
       resultMsg: "NORMAL_SERVICE",
@@ -168,13 +136,10 @@ router.get("/getManagementFeeDetail", async (req, res, next) => {
         mngFeeItem: mngFeeAlias,
         mngFee,
         totalMng,
-<<<<<<< HEAD
-=======
         // item: {
         //   mngFeeItem: mngFeeAlias,
         //   mngFee,
         // },
->>>>>>> f71cc3fe5d0585eb78da06a13a5bd8d8e96cb54c
       },
     };
 
